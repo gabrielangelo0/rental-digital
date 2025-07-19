@@ -2,102 +2,31 @@
 
 import { Calendar, Car, Clock, Filter, Heart, MapPin, Search, Star, Users } from "lucide-react"
 import Image from "next/image"
-import { useState } from "react"
-
+import { useState, useEffect } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
+import { carService } from "@/lib/car-service"
+import type { Car as CarType } from "@/types/car"
 
 export default function Component() {
   const [favorites, setFavorites] = useState<string[]>([])
+  const [cars, setCars] = useState<CarType[]>([])
+
+  useEffect(() => {
+    const loadCars = async () => {
+      const data = await carService.getAllCars()
+      setCars(data.filter((car) => car.available)) // Only show available cars
+    }
+    loadCars()
+  }, [])
 
   const toggleFavorite = (carId: string) => {
     setFavorites((prev) => (prev.includes(carId) ? prev.filter((id) => id !== carId) : [...prev, carId]))
   }
-
-  const cars = [
-    {
-      id: "1",
-      name: "Tesla Model S",
-      category: "Luxury",
-      image: "/placeholder.svg?height=200&width=300&text=Tesla+Model+S",
-      price: 120,
-      rating: 4.8,
-      reviews: 234,
-      features: ["Electric", "Autopilot", "Premium Interior"],
-      seats: 5,
-      transmission: "Automatic",
-      fuel: "Electric",
-    },
-    {
-      id: "2",
-      name: "BMW X5",
-      category: "SUV",
-      image: "/placeholder.svg?height=200&width=300&text=BMW+X5",
-      price: 95,
-      rating: 4.6,
-      reviews: 189,
-      features: ["AWD", "Leather Seats", "Navigation"],
-      seats: 7,
-      transmission: "Automatic",
-      fuel: "Gasoline",
-    },
-    {
-      id: "3",
-      name: "Audi A4",
-      category: "Sedan",
-      image: "/placeholder.svg?height=200&width=300&text=Audi+A4",
-      price: 75,
-      rating: 4.5,
-      reviews: 156,
-      features: ["Quattro", "Premium Sound", "Sunroof"],
-      seats: 5,
-      transmission: "Automatic",
-      fuel: "Gasoline",
-    },
-    {
-      id: "4",
-      name: "Mercedes C-Class",
-      category: "Luxury",
-      image: "/placeholder.svg?height=200&width=300&text=Mercedes+C-Class",
-      price: 85,
-      rating: 4.7,
-      reviews: 203,
-      features: ["AMG Package", "Massage Seats", "Ambient Lighting"],
-      seats: 5,
-      transmission: "Automatic",
-      fuel: "Gasoline",
-    },
-    {
-      id: "5",
-      name: "Porsche Cayenne",
-      category: "SUV",
-      image: "/placeholder.svg?height=200&width=300&text=Porsche+Cayenne",
-      price: 150,
-      rating: 4.9,
-      reviews: 98,
-      features: ["Sport Package", "Air Suspension", "Bose Audio"],
-      seats: 5,
-      transmission: "Automatic",
-      fuel: "Gasoline",
-    },
-    {
-      id: "6",
-      name: "Range Rover Evoque",
-      category: "SUV",
-      image: "/placeholder.svg?height=200&width=300&text=Range+Rover+Evoque",
-      price: 110,
-      rating: 4.4,
-      reviews: 167,
-      features: ["Terrain Response", "Panoramic Roof", "Meridian Audio"],
-      seats: 5,
-      transmission: "Automatic",
-      fuel: "Gasoline",
-    },
-  ]
 
   return (
     <div className="min-h-screen bg-gray-950 text-white">
@@ -120,6 +49,9 @@ export default function Component() {
               </a>
               <a href="#" className="text-gray-300 hover:text-white transition-colors">
                 Contato
+              </a>
+              <a href="/admin" className="text-gray-300 hover:text-white transition-colors">
+                Admin
               </a>
             </nav>
             <div className="flex items-center gap-4">
