@@ -170,15 +170,17 @@ export function AdminPanel() {
 
   if (viewMode === "create") {
     return (
-      <div className="min-h-screen bg-gray-950 text-white p-6">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 text-white p-6">
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">Adicionar Novo Carro</h1>
-            <p className="text-gray-400">Preencha os dados do novo veículo</p>
+            <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-white to-slate-200 bg-clip-text text-transparent">
+              Adicionar Novo Carro
+            </h1>
+            <p className="text-slate-300">Preencha os dados do novo veículo</p>
           </div>
 
-          <Card className="bg-gray-900/50 border-gray-800">
-            <CardContent className="p-6">
+          <Card className="bg-slate-800/40 border-slate-600/50 backdrop-blur-sm shadow-xl">
+            <CardContent className="p-8">
               <CarForm onSubmit={handleCreateCar} onCancel={handleCancel} isLoading={isLoading} />
             </CardContent>
           </Card>
@@ -189,15 +191,17 @@ export function AdminPanel() {
 
   if (viewMode === "edit" && editingCar) {
     return (
-      <div className="min-h-screen bg-gray-950 text-white p-6">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 text-white p-6">
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">Editar Carro</h1>
-            <p className="text-gray-400">Atualize os dados do veículo</p>
+            <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-white to-slate-200 bg-clip-text text-transparent">
+              Editar Carro
+            </h1>
+            <p className="text-slate-300">Atualize os dados do veículo</p>
           </div>
 
-          <Card className="bg-gray-900/50 border-gray-800">
-            <CardContent className="p-6">
+          <Card className="bg-slate-800/40 border-slate-600/50 backdrop-blur-sm shadow-xl">
+            <CardContent className="p-8">
               <CarForm car={editingCar} onSubmit={handleUpdateCar} onCancel={handleCancel} isLoading={isLoading} />
             </CardContent>
           </Card>
@@ -207,17 +211,19 @@ export function AdminPanel() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white p-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 text-white p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold mb-2">Painel Administrativo</h1>
-            <p className="text-gray-400">Gerencie a frota de veículos</p>
+            <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-white via-cyan-100 to-blue-100 bg-clip-text text-transparent">
+              Painel Administrativo
+            </h1>
+            <p className="text-slate-300 text-lg">Gerencie a frota de veículos</p>
           </div>
           <Button
             onClick={() => setViewMode("create")}
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all"
           >
             <Plus className="h-4 w-4 mr-2" />
             Adicionar Carro
@@ -226,66 +232,74 @@ export function AdminPanel() {
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card className="bg-gray-900/50 border-gray-800">
+          <Card className="bg-slate-800/40 border-slate-600/50 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-400">Total de Carros</CardTitle>
-              <CarIcon className="h-4 w-4 text-blue-400" />
+              <CardTitle className="text-sm font-medium text-slate-300">Total de Carros</CardTitle>
+              <div className="p-2 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-lg">
+                <CarIcon className="h-4 w-4 text-cyan-400" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white">{stats.total}</div>
+              <div className="text-3xl font-bold text-white">{stats.total}</div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-900/50 border-gray-800">
+          <Card className="bg-slate-800/40 border-slate-600/50 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-400">Disponíveis</CardTitle>
-              <Eye className="h-4 w-4 text-green-400" />
+              <CardTitle className="text-sm font-medium text-slate-300">Disponíveis</CardTitle>
+              <div className="p-2 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-lg">
+                <Eye className="h-4 w-4 text-emerald-400" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white">{stats.available}</div>
+              <div className="text-3xl font-bold text-white">{stats.available}</div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-900/50 border-gray-800">
+          <Card className="bg-slate-800/40 border-slate-600/50 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-400">Preço Médio</CardTitle>
-              <DollarSign className="h-4 w-4 text-yellow-400" />
+              <CardTitle className="text-sm font-medium text-slate-300">Preço Médio</CardTitle>
+              <div className="p-2 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-lg">
+                <DollarSign className="h-4 w-4 text-yellow-400" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white">${stats.avgPrice}</div>
+              <div className="text-3xl font-bold text-white">${stats.avgPrice}</div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-900/50 border-gray-800">
+          <Card className="bg-slate-800/40 border-slate-600/50 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-400">Categorias</CardTitle>
-              <Users className="h-4 w-4 text-purple-400" />
+              <CardTitle className="text-sm font-medium text-slate-300">Categorias</CardTitle>
+              <div className="p-2 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-lg">
+                <Users className="h-4 w-4 text-purple-400" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white">{stats.categories}</div>
+              <div className="text-3xl font-bold text-white">{stats.categories}</div>
             </CardContent>
           </Card>
         </div>
 
         {/* Filters */}
-        <Card className="bg-gray-900/50 border-gray-800 mb-8">
+        <Card className="bg-slate-800/40 border-slate-600/50 backdrop-blur-sm shadow-lg mb-8">
           <CardContent className="p-6">
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                <Search className="absolute left-3 top-3 h-5 w-5 text-cyan-400" />
                 <Input
                   placeholder="Buscar por nome ou categoria..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 bg-gray-800 border-gray-700 text-white"
+                  className="pl-11 bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400 focus:border-cyan-400 focus:ring-cyan-400/20"
                 />
               </div>
 
               <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-                <SelectTrigger className="w-48 bg-gray-800 border-gray-700">
+                <SelectTrigger className="w-48 bg-slate-700/50 border-slate-600 text-white">
                   <SelectValue placeholder="Categoria" />
                 </SelectTrigger>
-                <SelectContent className="bg-gray-800 border-gray-700">
+                <SelectContent className="bg-slate-800 border-slate-600">
                   <SelectItem value="all">Todas as categorias</SelectItem>
                   <SelectItem value="Luxury">Luxo</SelectItem>
                   <SelectItem value="SUV">SUV</SelectItem>
@@ -296,10 +310,10 @@ export function AdminPanel() {
               </Select>
 
               <Select value={availabilityFilter} onValueChange={setAvailabilityFilter}>
-                <SelectTrigger className="w-48 bg-gray-800 border-gray-700">
+                <SelectTrigger className="w-48 bg-slate-700/50 border-slate-600 text-white">
                   <SelectValue placeholder="Disponibilidade" />
                 </SelectTrigger>
-                <SelectContent className="bg-gray-800 border-gray-700">
+                <SelectContent className="bg-slate-800 border-slate-600">
                   <SelectItem value="all">Todos</SelectItem>
                   <SelectItem value="available">Disponíveis</SelectItem>
                   <SelectItem value="unavailable">Indisponíveis</SelectItem>
